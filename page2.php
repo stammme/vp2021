@@ -41,10 +41,24 @@
 	$file_count = count($photo_files);
 	//loosin juhusliku arvu (min peab olema 0 ja max count -1)
 	$photo_num = mt_rand(0, $file_count - 1);
+	
+	if(isset($_POST["photo_submit"])){
+		$photo_num = $_POST["photo_select"];
+	}
+	
 	//<img src="kataloog/fail" alt="Tallinna Ülikool">
 	$photo_html = '<img src="' .$photo_dir . $photo_files[$photo_num] .' " alt="Tallinna Ülikool">';
 	
-	
+	/*<select name="photo_select_html">
+		<option value="0">tlu_astra_600x400_1.jpg</option> 
+		<option value="1">tlu_astra_600x400_2.jpg</option> 
+		<option value="2">tlu_hoov_600x400_1.jpg</option> 
+		<option value="3">tlu_mare_1.jpg</option> 
+		<option value="4">tlu_mare_2.jpg</option> 
+		<option value="5">tlu_terra_600x400_1.jpg</option> 
+		<option value="6">tlu_terra_600x400_2.jpg</option> 
+		<option value="7">tlu_terra_600x400_3.jpg</option> 
+	</select> */
 	//tsükkel
 	//näiteks:
 	//<ul>
@@ -53,14 +67,13 @@
 	//		<li>pildifailinimi3.jpg</li>
 	//</ul>
 	
-	$photo_select_html = "\n <ul> \n";
+$photo_list_html = "\n <ul> \n";
 	for($i = 0;$i < $file_count;$i ++){
 		$photo_list_html .= "<li>" .$photo_files[$i] ."</li> \n";
 	}
 	$photo_list_html .= "</ul> \n";
-	
 		
-	$photo_list_html = "\n" .'<select name="photo_select">' ."\n";
+	$photo_select_html = "\n" .'<select name="photo_select">' ."\n";
 	for($i = 0;$i < $file_count;$i ++){
 		$photo_select_html .= '<option value="' .$i .'">' .$photo_files[$i] ."</option> \n";
 	}
@@ -86,9 +99,10 @@
 	<hr>
 	<form method="POST">
 		<?php echo $photo_select_html; ?>
-	<?php
+		<input type="submit" name="photo_submit" value="Saada">
+	<?php 
 		echo $photo_html; 
 		echo $photo_list_html;
 	?>
 </body>
-</html>
+</html>	
