@@ -48,6 +48,7 @@
 	
 	//<img src="kataloog/fail" alt="Tallinna Ülikool">
 	$photo_html = '<img src="' .$photo_dir . $photo_files[$photo_num] .' " alt="Tallinna Ülikool">';
+	$photo_file_html = "\n <p>".$photo_files[$photo_num] ."</p> \n";
 	
 	/*<select name="photo_select_html">
 		<option value="0">tlu_astra_600x400_1.jpg</option> 
@@ -73,9 +74,13 @@ $photo_list_html = "\n <ul> \n";
 	}
 	$photo_list_html .= "</ul> \n";
 		
-	$photo_select_html = "\n" .'<select name="photo_select">' ."\n";
+$photo_select_html = "\n" .'<select name="photo_select">' ."\n";
 	for($i = 0;$i < $file_count;$i ++){
-		$photo_select_html .= '<option value="' .$i .'">' .$photo_files[$i] ."</option> \n";
+		$photo_select_html .= '<option value="' .$i .'"';
+        if($i == $photo_num){
+			$photo_select_html .= " selected";
+		}
+        $photo_select_html .= ">" .$photo_files[$i] ."</option> \n";
 	}
 	$photo_select_html .= "</select> \n";
 ?>
@@ -102,6 +107,8 @@ $photo_list_html = "\n <ul> \n";
 		<input type="submit" name="photo_submit" value="Saada">
 	<?php 
 		echo $photo_html; 
+		echo $photo_list_html;
+			echo "<hr> \n";
 		echo $photo_list_html;
 	?>
 </body>
